@@ -29,5 +29,15 @@ class IFibServiceImpl extends IFibService.Stub {
 	public long fibJR(long n) throws RemoteException {
 		return FibLib.fibJR(n);
 	}
+
+	@Override
+	public long fibNI(long n) throws RemoteException {
+		return FibLib.fibNI(n);
+	}
+
+	@Override
+	public long fibNR(long n) throws RemoteException {
+		return FibLib.fibNR(n);
+	}
 	
 }
