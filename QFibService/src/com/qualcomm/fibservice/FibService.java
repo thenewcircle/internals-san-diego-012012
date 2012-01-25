@@ -4,16 +4,18 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 import com.qualcomm.fibcommon.IFibService;
 
 public class FibService extends Service {
+	static final String TAG = "QFib";
 
 	@Override
 	public IBinder onBind(Intent intent) {
+		Log.d(TAG, "onBind");
 		return new IFibServiceImpl();
 	}
-
 	
 }
 
@@ -22,6 +24,7 @@ class IFibServiceImpl extends IFibService.Stub {
 
 	@Override
 	public long fibJI(long n) throws RemoteException {
+		Log.d(FibService.TAG, "fibJI with n:"+n);
 		return FibLib.fibJI(n);
 	}
 

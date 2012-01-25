@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.qualcomm.fibcommon.IFibService;
 
 public class FibActivity extends Activity {
+	static final String TAG = "QFib";
 	TextView out;
 	EditText in;
 	IFibService service;
@@ -29,6 +31,7 @@ public class FibActivity extends Activity {
 		Intent intent = new Intent("com.qualcomm.fibcommon.IFibService");
 		IFibServiceConnection connection = new IFibServiceConnection();
 		boolean success = bindService(intent, connection, BIND_AUTO_CREATE);
+		Log.d(TAG, "onCreate bound with: "+success);
 	}
 
 	/** Responsible for handing connection to the service. */
@@ -36,11 +39,13 @@ public class FibActivity extends Activity {
 		@Override
 		public void onServiceConnected(ComponentName component, IBinder binder) {
 			service = IFibService.Stub.asInterface(binder);
+			Log.d(TAG, "onServiceConnected");
 		}
 
 		@Override
 		public void onServiceDisconnected(ComponentName component) {
 			service = null;
+			Log.d(TAG, "onServiceDisconnected");
 		}
 	}
 
@@ -49,6 +54,8 @@ public class FibActivity extends Activity {
 		// Get input from user
 		long n = Long.parseLong(in.getText().toString());
 
+		Log.d(TAG, "onClicked with n="+n);
+		
 		try {
 			// Java Recursive
 			long start = System.currentTimeMillis();
