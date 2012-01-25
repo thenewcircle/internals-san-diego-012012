@@ -24,10 +24,17 @@ public class FibActivity extends Activity {
     		// Get input from user
     		long n = Long.parseLong( in.getText().toString() );
     		
-    		// Use library to do calculations
+    		// Java Recursive
+    		long start = System.currentTimeMillis();
     		long fibJR = FibLib.fibJR(n);
+    		long timeJR = System.currentTimeMillis() - start;
+       	out.append( String.format("\nfibJR(%d)=%d (%d ms)", n, fibJR, timeJR) );
     		
-    		// Print the output
-    		out.append( String.format("\nfibJR(%d)=%d", n, fibJR) );
+    		// Native Recursive
+       	start = System.currentTimeMillis();
+    		long fibNR = FibLib.fibNR(n);
+    		long timeNR = System.currentTimeMillis() - start;
+    		out.append( String.format("\nfibNR(%d)=%d (%d ms)", n, fibNR, timeNR) );
+
     }
 }
