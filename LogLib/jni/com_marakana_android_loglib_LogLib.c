@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <android/log.h>
 
+JNIEXPORT jint JNICALL
+JNI_OnLoad(JavaVM *vm, void *reserved) {
+	return JNI_VERSION_1_6;
+}
+
 JNIEXPORT void JNICALL Java_com_marakana_android_loglib_LogLib_log
   (JNIEnv *env, jclass clazz, jint priority, jstring tag, jstring message) {
 	const jbyte *str_tag;
