@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import android.view.View;
 
 import com.marakana.android.logcommon.ILogService;
+import com.marakana.android.logcommon.Message;
 
 public class LogActivity extends Activity {
 	static final Intent INTENT = new Intent(
@@ -42,9 +43,10 @@ public class LogActivity extends Activity {
 	/** Called when button is clicked. */
 	public void onClick(View v) {
 		try {
-			service.log(3, "MrknLog", "onClicked!");
+			Message message = new Message(3, "MrknLog", "onClicked!");
+			service.logMessage(message);
+//			service.log(3, "MrknLog", "onClicked!");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
