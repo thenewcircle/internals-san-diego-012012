@@ -7,8 +7,10 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 
+import com.marakana.android.logcommon.ILogListener;
 import com.marakana.android.logcommon.ILogService;
 import com.marakana.android.logcommon.Message;
 
@@ -16,7 +18,15 @@ public class LogActivity extends Activity {
 	static final Intent INTENT = new Intent(
 			"com.marakana.android.logcommon.ILogService");
 	ILogService service;
+	ILogListener listener;
 
+	class LogListener extends ILogListener.Stub {
+		@Override
+		public void onResponse(String response) throws RemoteException {
+			Log.d("MrknLog", "LogListener response "+response);
+		}
+	}
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +54,7 @@ public class LogActivity extends Activity {
 	public void onClick(View v) {
 		try {
 			Message message = new Message(3, "MrknLog", "onClicked!");
-			service.logMessage(message);
+			service.asyncLog(message, new LogListener());
 			service.logd("MrknLog", "onClicked logd");
 //			service.log(3, "MrknLog", "onClicked!");
 		} catch (RemoteException e) {
