@@ -19,4 +19,9 @@ public class ILogServiceImpl extends ILogService.Stub {
 		LogLib.log(message.priority, message.tag, message.text);
 	}
 
+	@Override
+	public void logd(String tag, String message) throws RemoteException {
+		LogLib.log(3, tag, message);
+	}
+
 }

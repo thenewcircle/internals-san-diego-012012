@@ -45,6 +45,7 @@ public class LogActivity extends Activity {
 		try {
 			Message message = new Message(3, "MrknLog", "onClicked!");
 			service.logMessage(message);
+			service.logd("MrknLog", "onClicked logd");
 //			service.log(3, "MrknLog", "onClicked!");
 		} catch (RemoteException e) {
 			e.printStackTrace();
