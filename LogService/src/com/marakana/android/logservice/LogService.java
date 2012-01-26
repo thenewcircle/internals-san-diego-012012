@@ -10,5 +10,4 @@ public class LogService extends Service {
 	public IBinder onBind(Intent intent) {
 		return new ILogServiceImpl();
 	}
-
 }

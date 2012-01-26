@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, LogActivity!</string>
     <string name="app_name">LogClient</string>
+    <string name="log">Log!</string>
 
 </resources>
